@@ -30,7 +30,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         billAmountTextField.becomeFirstResponder()
         billAmountTextField.delegate = self
     }
-    // hide the keyboard
+    // hide the keyboard when done using 
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
         //billAmountTextField.resignFirstResponder()
