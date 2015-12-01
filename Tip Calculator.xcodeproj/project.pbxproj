@@ -156,6 +156,7 @@
 		CC0AD90C1A9014C100112A3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mbusi Hlatshwayo";
 				TargetAttributes = {
@@ -405,6 +406,7 @@
 				CC0AD9351A9014C200112A3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC0AD9361A9014C200112A3F /* Build configuration list for PBXNativeTarget "Tip CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +415,7 @@
 				CC0AD9381A9014C200112A3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

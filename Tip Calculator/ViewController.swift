@@ -31,7 +31,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         billAmountTextField.delegate = self
     }
     // hide the keyboard when user touches elsewhere on the screen
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         self.view.endEditing(true)
         //billAmountTextField.resignFirstResponder()
     }
@@ -60,12 +60,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         // if there is a bill amount calculate the tip and total
-        if !inputString.isEmpty {
+        if inputString!.isEmpty {
             // convert to NSDecimalNumber and insert the decimal point
             let billAmount = (NSDecimalNumber(string: inputString) / decimal100)
             // the bill amount split between number of people
             let splitBillAmount = (NSDecimalNumber(string: inputString) / decimal100) / splitSliderValue
-            
             
             
             // did the text field generate the event?
