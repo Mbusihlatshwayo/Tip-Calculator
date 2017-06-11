@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var billAmountTextField: UITextField!
     let decimal100 = NSDecimalNumber(string: "100.0")
     let decimal15Percent = NSDecimalNumber(string: ".15")
-    
+    var inputString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // inputTextField is selected so the keyboard is displayed every time the view loads
@@ -31,19 +31,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         billAmountTextField.delegate = self
     }
     // hide the keyboard when user touches elsewhere on the screen
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
         //billAmountTextField.resignFirstResponder()
     }
     
-    @IBAction func calculateTip(sender: AnyObject) {
-        let inputString = billAmountTextField.text // get the user input
+    @IBAction func calculateTip(_ sender: AnyObject) {
+        inputString = billAmountTextField.text! // get the user input
         
         // convert the slider value to an NSDecimalNumber
-        let sliderValue = NSDecimalNumber(integer: Int(customTipPercentSlider.value))
+        let sliderValue = NSDecimalNumber(value: Int(customTipPercentSlider.value) as Int)
         
         // convert the split slider value to a NSNumber
-        let splitSliderValue = NSDecimalNumber(integer: Int(customSplitSlider.value))
+        let splitSliderValue = NSDecimalNumber(value: Int(customSplitSlider.value) as Int)
         
         // get the tip %
         let customPercent = sliderValue / decimal100
@@ -51,16 +51,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // did the slider generate the event?
         if sender is UISlider {
             //slider moved update the labels with the new custom tip percent
-            customTipPercentLabel1.text = NSNumberFormatter.localizedStringFromNumber(customPercent, numberStyle: NSNumberFormatterStyle.PercentStyle)
+            customTipPercentLabel1.text = NumberFormatter.localizedString(from: customPercent, number: NumberFormatter.Style.percent)
             
             customTipPercentLabel2.text = customTipPercentLabel1.text
             
             //display number of people in label
-            splitLabel.text = NSNumberFormatter.localizedStringFromNumber(splitSliderValue, numberStyle: NSNumberFormatterStyle.NoStyle)
+            splitLabel.text = NumberFormatter.localizedString(from: splitSliderValue, number: NumberFormatter.Style.none)
         }
         
         // if there is a bill amount calculate the tip and total
-        if inputString!.isEmpty {
+        if inputString.isEmpty == false {
             // convert to NSDecimalNumber and insert the decimal point
             let billAmount = (NSDecimalNumber(string: inputString) / decimal100)
             // the bill amount split between number of people
@@ -95,21 +95,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
 }
 
 // convert number value to currency string
-func formatAsCurrency(number: NSNumber) -> String {
-    return NSNumberFormatter.localizedStringFromNumber(number, numberStyle: NSNumberFormatterStyle.CurrencyStyle)
+func formatAsCurrency(_ number: NSNumber) -> String {
+    return NumberFormatter.localizedString(from: number, number: NumberFormatter.Style.currency)
 }
 
 // overloaded + operator to add NSDecimal nubers
 func +(left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
-    return left.decimalNumberByAdding(right)
+    return left.adding(right)
 }
 
 // overloaded * operator to multiply NSDecimal numbers
 func *(left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
-    return left.decimalNumberByMultiplyingBy(right)
+    return left.multiplying(by: right)
 }
 
 // overladed / operator to divide NSDecimal numbers
 func /(left: NSDecimalNumber, right: NSDecimalNumber) -> NSDecimalNumber {
-    return left.decimalNumberByDividingBy(right)
+    return left.dividing(by: right)
 }
